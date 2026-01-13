@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Jmezombies",
+            "request": "launch",
+            "mainClass": "org.jme.zombies.Jmezombies",
+            "osx": {
+                "vmArgs": "-XstartOnFirstThread -ea"
+            },
+            "vmArgs": "-ea"
+        }
+    ]
+}
