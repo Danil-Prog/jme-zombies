@@ -5,6 +5,8 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
+import com.jme3.light.LightList;
+import com.jme3.light.PointLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
@@ -78,21 +80,28 @@ public class TerrainFactory implements Context {
         this.rootNode = game.getRootNode();
         this.assetManager = game.getAssetManager();
         this.viewPort = game.getViewPort();
-        this.worldMap = assetManager.loadModel("Scenes/Map.obj");
+        this.worldMap = assetManager.loadModel("Scenes/Map.gltf");
 
         navMeshRenderer = new NavMeshDebugRenderer(assetManager);
     }
 
     public void buildTerrainEnvironment() {
+        worldNode = new Node("worldNode");
+        worldNode.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
+
         worldMap.setLocalTranslation(0, -2, 0);
-        worldMap.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
 
         RigidBodyControl worldRigidBodyControl = new RigidBodyControl(0f);
         worldMap.addControl(worldRigidBodyControl);
 
         bulletAppState.getPhysicsSpace().add(worldRigidBodyControl);
 
-        worldNode = new Node("worldNode");
+        LightList lightList = worldNode.getLocalLightList();
+
+        lightList.forEach(light -> {
+            System.out.println(light.getName());
+        });
+
         worldNode.attachChild(worldMap);
 
         rootNode.attachChild(worldNode);
@@ -133,10 +142,6 @@ public class TerrainFactory implements Context {
 
         ColorRGBA skyColor = new ColorRGBA(0.1f, 0.2f, 0.4f, 1f);
         viewPort.setBackgroundColor(skyColor);
-
-        AmbientLight al = new AmbientLight();
-        al.setName("Global");
-        rootNode.addLight(al);
 
         DirectionalLight directionalLight = new DirectionalLight();
         directionalLight.setName("Sun");
@@ -273,7 +278,7 @@ public class TerrainFactory implements Context {
             @Override
             public void visit(Geometry geometry) {
 
-                if (geometry.getMaterial() == null) {
+                if (geometry.getMaterial() == null || geometry.getMaterial().getName() == null) {
                     return;
                 }
 

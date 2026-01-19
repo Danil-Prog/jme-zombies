@@ -55,6 +55,7 @@ dependencies {
     implementation files('libs/jme-navmesh-ai-0.1.0-0.1.0.jar')
     runtimeClasspath files('libs/jme-navmesh-ai-0.1.0-0.1.0.jar')
 
+    implementation("com.github.stephengold:MonkeyWrench:1.0.0")
 
     // recast4j
     implementation 'org.recast4j:parent:' + recast4jVersion

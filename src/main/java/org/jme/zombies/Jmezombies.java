@@ -1,5 +1,6 @@
 package org.jme.zombies;
 
+import com.github.stephengold.wrench.LwjglAssetLoader;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.TextureKey;
 import com.jme3.bullet.BulletAppState;
@@ -55,6 +56,10 @@ public class Jmezombies extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        assetManager.registerLoader(LwjglAssetLoader.class,
+                "3ds", "3mf", "blend", "bvh", "dae", "fbx", "glb", "gltf",
+                "lwo", "meshxml", "mesh.xml", "obj", "ply", "stl");
+
         EntityFactory.assetManager = assetManager;
 
         stateManager.attach(bulletAppState);
