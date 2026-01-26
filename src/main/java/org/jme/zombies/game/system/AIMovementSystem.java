@@ -14,30 +14,25 @@ import com.jme3.recast4j.ai.NavMeshQueryFilter;
 import com.simsilica.es.Entity;
 import com.simsilica.es.EntityId;
 import com.simsilica.es.EntitySet;
+import java.util.Arrays;
+import java.util.concurrent.Executors;
+import javax.annotation.Nonnull;
 import org.jme.zombies.game.component.AIComponent;
 import org.jme.zombies.game.component.NodeComponent;
 import org.jme.zombies.game.component.PositionComponent;
 import org.jme.zombies.game.entity.EntityFactory;
-import org.jme.zombies.game.terrain.AreaInfo;
 import org.recast4j.detour.DefaultQueryFilter;
 import org.recast4j.detour.FindRandomPointResult;
 import org.recast4j.detour.NavMesh;
 import org.recast4j.detour.NavMeshQuery;
 import org.recast4j.detour.Result;
-
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.concurrent.Executors;
-
 import static com.jme3.recast4j.recast.JmeAreaMods.POLYFLAGS_ALL;
 import static com.jme3.recast4j.recast.JmeAreaMods.POLYFLAGS_DISABLED;
 import static org.recast4j.detour.NavMeshQuery.FRand;
 
 public class AIMovementSystem extends AbstractAppState {
 
-    /**
-     * AI Entities.
-     */
+    // AI Entities.
     private EntitySet entities;
     private Entity player;
     private AssetManager assetManager;

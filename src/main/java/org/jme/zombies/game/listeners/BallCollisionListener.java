@@ -13,11 +13,9 @@ import org.jme.zombies.Jmezombies;
 public class BallCollisionListener implements PhysicsCollisionListener {
 
     private final AssetManager assetManager;
-    private final Node rootNode;
 
     public BallCollisionListener(Jmezombies app) {
         this.assetManager = app.getAssetManager();
-        this.rootNode = app.getRootNode();
     }
 
     @Override
