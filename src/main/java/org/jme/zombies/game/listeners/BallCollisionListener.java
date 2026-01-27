@@ -23,7 +23,7 @@ public class BallCollisionListener implements PhysicsCollisionListener {
         var nameA = event.getNodeA().getName();
         var nameB = event.getNodeB().getName();
 
-        if ((nameA.equals("ball") || nameB.equals("ball")) && (nameA.contains("Enemy_") || nameB.equals("Enemy_"))) {
+        if ((nameA.contains("Ball") || nameB.contains("Ball")) && (nameA.contains("Enemy") || nameB.contains("Enemy"))) {
             System.out.println("Попал по врагу: " + nameA);
             Node enemy = (Node) event.getNodeA();
 

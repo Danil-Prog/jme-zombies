@@ -79,9 +79,7 @@ public class EntityFactory {
         player.addControl(control);
         player.setShadowMode(ShadowMode.CastAndReceive);
 
-        worldNode.attachChild(player);
-
-        bulletAppState.getPhysicsSpace().add(player);
+        addEntityToWorld(player);
 
         entityData.setComponents(
                 entityId,
@@ -114,8 +112,7 @@ public class EntityFactory {
 
         npc.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
 
-        bulletAppState.getPhysicsSpace().add(npc);
-        worldNode.attachChild(npc);
+        addEntityToWorld(npc);
 
         AIComponent aiComponent = new AIComponent();
 
@@ -154,8 +151,7 @@ public class EntityFactory {
         ballControl.setPhysicsLocation(location.add(direction.mult(3f)));
         ballControl.setLinearVelocity(direction.mult(20));
 
-        bulletAppState.getPhysicsSpace().add(ball);
-        worldNode.attachChild(ball);
+        addEntityToWorld(ball);
 
         entityData.setComponents(
                 id,
@@ -171,5 +167,10 @@ public class EntityFactory {
 
     public EntityData getEntityData() {
         return entityData;
+    }
+
+    private void addEntityToWorld(Node entity) {
+        bulletAppState.getPhysicsSpace().add(entity);
+        worldNode.attachChild(entity);
     }
 }
