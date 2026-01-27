@@ -7,12 +7,12 @@ import com.jme3.bullet.control.CharacterControl;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.simsilica.es.Entity;
-import com.simsilica.es.EntityId;
 import org.jme.zombies.game.component.MoveComponent;
 import org.jme.zombies.game.component.NodeComponent;
+import org.jme.zombies.game.component.PlayerComponent;
 import org.jme.zombies.game.component.PositionComponent;
 import org.jme.zombies.game.component.VelocityComponent;
-import org.jme.zombies.game.entity.EntityFactory;
+import org.jme.zombies.game.states.EntityState;
 
 public class PlayerMovementSystem extends AbstractAppState {
 
@@ -23,15 +23,14 @@ public class PlayerMovementSystem extends AbstractAppState {
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
-        EntityId playerId = EntityFactory.getPlayerEntityId();
+        var entityState = stateManager.getState(EntityState.class);
 
-        this.player = EntityFactory.entityData.getEntity(
-                playerId,
+        this.player = entityState.getEntityOrThrow(
+                PlayerComponent.class,
                 NodeComponent.class,
                 MoveComponent.class,
                 VelocityComponent.class,
-                PositionComponent.class
-        );
+                PositionComponent.class);
 
         this.camera = app.getCamera();
 

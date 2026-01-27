@@ -7,25 +7,26 @@ import com.jme3.asset.AssetManager;
 import com.jme3.bullet.control.CharacterControl;
 import com.jme3.math.Vector3f;
 import com.jme3.recast4j.ai.NavMeshAgent;
-import com.jme3.recast4j.ai.NavMeshAgentDebug;
 import com.jme3.recast4j.ai.NavMeshPath;
 import com.jme3.recast4j.ai.NavMeshPathStatus;
 import com.jme3.recast4j.ai.NavMeshQueryFilter;
 import com.simsilica.es.Entity;
-import com.simsilica.es.EntityId;
 import com.simsilica.es.EntitySet;
-import java.util.Arrays;
-import java.util.concurrent.Executors;
-import javax.annotation.Nonnull;
 import org.jme.zombies.game.component.AIComponent;
 import org.jme.zombies.game.component.NodeComponent;
+import org.jme.zombies.game.component.PlayerComponent;
 import org.jme.zombies.game.component.PositionComponent;
-import org.jme.zombies.game.entity.EntityFactory;
+import org.jme.zombies.game.states.EntityState;
+import org.jme.zombies.game.states.NavigationMeshAppState;
 import org.recast4j.detour.DefaultQueryFilter;
 import org.recast4j.detour.FindRandomPointResult;
-import org.recast4j.detour.NavMesh;
 import org.recast4j.detour.NavMeshQuery;
 import org.recast4j.detour.Result;
+
+import java.util.Arrays;
+import java.util.concurrent.Executors;
+import java.util.logging.Logger;
+
 import static com.jme3.recast4j.recast.JmeAreaMods.POLYFLAGS_ALL;
 import static com.jme3.recast4j.recast.JmeAreaMods.POLYFLAGS_DISABLED;
 import static org.recast4j.detour.NavMeshQuery.FRand;
@@ -37,11 +38,9 @@ public class AIMovementSystem extends AbstractAppState {
     private Entity player;
     private AssetManager assetManager;
 
-    private final NavMeshQuery navMeshQuery;
+    private NavMeshQuery navMeshQuery;
 
-    public AIMovementSystem(NavMesh navMeshTerrain) {
-        this.navMeshQuery = new NavMeshQuery(navMeshTerrain);
-    }
+    private final Logger logger = Logger.getLogger(AIMovementSystem.class.getName());
 
     @Override
     public void initialize(
@@ -49,15 +48,20 @@ public class AIMovementSystem extends AbstractAppState {
             Application application
     ) {
         super.initialize(stateManager, application);
-        EntityId playerId = EntityFactory.getPlayerEntityId();
 
-        this.entities = EntityFactory.entityData.getEntities(
+        var entityState = stateManager.getState(EntityState.class);
+        var navigationMeshAppState = stateManager.getState(NavigationMeshAppState.class);
+        var navigationMesh = navigationMeshAppState.getNavigationMesh();
+
+        this.navMeshQuery = new NavMeshQuery(navigationMesh);
+
+        this.entities = entityState.getEntities(
                 AIComponent.class,
                 NodeComponent.class
         );
 
-        this.player = EntityFactory.entityData.getEntity(
-                playerId,
+        this.player = entityState.getEntityOrThrow(
+                PlayerComponent.class,
                 PositionComponent.class,
                 NodeComponent.class
         );
@@ -88,8 +92,6 @@ public class AIMovementSystem extends AbstractAppState {
 
             if (path.getStatus() == NavMeshPathStatus.PathComplete) {
                 agent.setPath(path);
-            } else {
-                System.err.println("Couldn't find the path");
             }
         });
     }
@@ -98,14 +100,14 @@ public class AIMovementSystem extends AbstractAppState {
         var enemy = nodeComponent.entity;
 
         if (aiComponent.agent == null) {
-            NavMeshAgentDebug debug = new NavMeshAgentDebug(assetManager);
+//            NavMeshAgentDebug debug = new NavMeshAgentDebug(assetManager);
 
             aiComponent.agent = enemy.getControl(NavMeshAgent.class);
-            aiComponent.agent.setSpeed(4);
+            aiComponent.agent.setSpeed(2);
             aiComponent.agent.setStoppingDistance(3f);
 
             enemy.addControl(aiComponent.agent);
-            enemy.addControl(debug);
+//            enemy.addControl(debug);
 
             NavMeshQueryFilter filter = getNavMeshQueryFilter();
 
@@ -115,8 +117,7 @@ public class AIMovementSystem extends AbstractAppState {
         return enemy.getControl(NavMeshAgent.class);
     }
 
-    @Nonnull
-    private static NavMeshQueryFilter getNavMeshQueryFilter() {
+    private NavMeshQueryFilter getNavMeshQueryFilter() {
         return new NavMeshQueryFilter(POLYFLAGS_ALL, POLYFLAGS_DISABLED);
     }
 
@@ -132,7 +133,7 @@ public class AIMovementSystem extends AbstractAppState {
 
             System.out.println("Generated new enemy position: " + Arrays.toString(position));
 
-            EntityFactory.createEnemy(position[0], position[2]);
+//            EntityFactory.createEnemy(position[0], position[2]);
         }
     }
 }

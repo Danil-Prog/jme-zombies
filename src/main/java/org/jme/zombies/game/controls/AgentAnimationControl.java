@@ -31,10 +31,10 @@ public class AgentAnimationControl extends AbstractControl {
     @Override
     public void controlUpdate(float tpf) {
         if (agent.remainingDistance() < agent.getStoppingDistance() && !agent.pathPending()) {
-            animator.setAnimation("Idle");
+            animator.setAnimation("Armature|Idle");
             animator.setSpeed(1);
         } else {
-            animator.setAnimation("Walk");
+            animator.setAnimation("Armature|Walk");
             animator.setSpeed(2.5f);
         }
     }

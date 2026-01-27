@@ -8,13 +8,13 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import org.jme.zombies.Jmezombies;
+import org.jme.zombies.GameApplication;
 
 public class BallCollisionListener implements PhysicsCollisionListener {
 
     private final AssetManager assetManager;
 
-    public BallCollisionListener(Jmezombies app) {
+    public BallCollisionListener(GameApplication app) {
         this.assetManager = app.getAssetManager();
     }
 
