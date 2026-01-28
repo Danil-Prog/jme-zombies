@@ -19,6 +19,7 @@ import com.jme3.scene.Spatial;
 import com.simsilica.es.EntityData;
 import com.simsilica.es.EntityId;
 import com.simsilica.es.base.DefaultEntityData;
+import java.util.HashMap;
 import org.jme.zombies.GameApplication;
 import org.jme.zombies.game.component.AIComponent;
 import org.jme.zombies.game.component.DetachComponent;
@@ -30,6 +31,11 @@ import org.jme.zombies.game.component.ShootComponent;
 import org.jme.zombies.game.component.VelocityComponent;
 import org.jme.zombies.game.controls.AgentAnimationControl;
 import org.jme.zombies.game.controls.AnimatorControl;
+import org.jme.zombies.game.entity.EntityType;
+import org.jme.zombies.game.factory.enemy.EntityCreator;
+import org.jme.zombies.game.factory.enemy.impl.EnemyCreator;
+import org.jme.zombies.game.factory.enemy.impl.ItemCreator;
+import org.jme.zombies.game.factory.enemy.impl.PlayerCreator;
 import org.jme.zombies.game.states.NavigationMeshAppState;
 import org.jme.zombies.game.states.WorldAppState;
 import org.jme.zombies.game.utils.ShapeUtils;
@@ -44,7 +50,15 @@ public class EntityFactory {
     private final BulletAppState bulletAppState;
     private final NavMesh navMesh;
 
+    private final HashMap<EntityType, EntityCreator<EntityType>> entityCreators = new HashMap<>();
+
     private static int index = 0;
+
+    {
+        entityCreators.put(EntityType.PLAYER, new PlayerCreator(entityData));
+        entityCreators.put(EntityType.ENEMY, new EnemyCreator(entityData));
+        entityCreators.put(EntityType.ITEM, new ItemCreator(entityData));
+    }
 
     public EntityFactory(AppStateManager stateManager, Application app) {
         var application = ((GameApplication) app);
@@ -57,6 +71,10 @@ public class EntityFactory {
 
         this.bulletAppState = stateManager.getState(BulletAppState.class);
         this.navMesh = navigationMeshAppState.getNavigationMesh();
+    }
+
+    public EntityId createEntity(EntityType type) {
+        return entityCreators.get(type).createEntity();
     }
 
     public EntityId createPlayer() {
