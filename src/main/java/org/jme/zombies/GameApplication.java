@@ -13,8 +13,8 @@ import org.jme.zombies.game.states.NavigationMeshAppState;
 import org.jme.zombies.game.states.WorldAppState;
 import org.jme.zombies.game.system.AIMovementSystem;
 import org.jme.zombies.game.system.DetachingSystem;
+import org.jme.zombies.game.system.HealthBarSystem;
 import org.jme.zombies.game.system.PlayerMovementSystem;
-import org.jme.zombies.game.system.WeaponMovementSystem;
 
 public class GameApplication extends SimpleApplication {
 
@@ -56,8 +56,8 @@ public class GameApplication extends SimpleApplication {
         // Initialize system from ECS
         stateManager.attach(new AIMovementSystem());
         stateManager.attach(new PlayerMovementSystem());
-        stateManager.attach(new WeaponMovementSystem());
         stateManager.attach(new DetachingSystem());
+        stateManager.attach(new HealthBarSystem());
 
         bulletAppState.setDebugEnabled(false);
         bulletAppState.getPhysicsSpace().addCollisionListener(new BallCollisionListener(this));

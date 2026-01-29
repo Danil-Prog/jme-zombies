@@ -8,7 +8,11 @@ import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.renderer.Camera;
+import com.simsilica.es.Entity;
+import org.jme.zombies.game.component.NodeComponent;
+import org.jme.zombies.game.component.PlayerComponent;
 import org.jme.zombies.game.constants.InputTriggers;
+import org.jme.zombies.game.entity.EntityType;
 import org.jme.zombies.game.states.EntityState;
 
 /**
@@ -34,7 +38,7 @@ public class ShootListener extends AbstractAppState implements ActionListener {
     @Override
     public void onAction(String name, boolean isPressed, float tpf) {
         if (!isPressed) {
-            entityState.createBall(camera.getLocation(), camera.getDirection());
+            entityState.createEntityByType(EntityType.BULLET, camera.getLocation(), camera.getDirection());
         }
     }
 

@@ -5,7 +5,7 @@
             "type": "java",
             "name": "Launch Jmezombies",
             "request": "launch",
-            "mainClass": "org.jme.zombies.Jmezombies",
+            "mainClass": "org.jme.zombies.GameApplication",
             "osx": {
                 "vmArgs": "-XstartOnFirstThread -ea"
             },

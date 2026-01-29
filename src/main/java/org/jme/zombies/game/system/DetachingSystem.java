@@ -7,6 +7,7 @@ import com.jme3.scene.Node;
 import com.simsilica.es.EntitySet;
 import org.jme.zombies.game.component.DetachComponent;
 import org.jme.zombies.game.component.NodeComponent;
+import org.jme.zombies.game.entity.EntityType;
 import org.jme.zombies.game.states.EntityState;
 import org.jme.zombies.game.states.WorldAppState;
 
@@ -40,7 +41,7 @@ public class DetachingSystem extends AbstractAppState {
                 entityState.removeEntityById(entity.getId());
                 nodeComponent.entity.removeFromParent();
 
-                entityState.createEnemy();
+                entityState.createEntityByType(EntityType.ENEMY, 0f, 0f);
             }
         });
     }

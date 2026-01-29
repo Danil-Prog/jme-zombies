@@ -16,7 +16,7 @@ java {
 ext.jmonkeyengineVersion = '3.8.1-stable'
 ext.recast4jVersion = '1.2.8'
 
-mainClassName = 'org.jme.zombies.Jmezombies'
+mainClassName = 'org.jme.zombies.GameApplication'
 if (!hasProperty('mainClass')) {
     ext.mainClass = mainClassName
 }

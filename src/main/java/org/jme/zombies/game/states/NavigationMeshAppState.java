@@ -201,7 +201,7 @@ public class NavigationMeshAppState extends AbstractAppState {
                 };
 
                 m_geom.addModification(mod);
-                System.out.println("setNavMeshArea " + mod);
+                System.out.println(mod);
             }
         });
     }
