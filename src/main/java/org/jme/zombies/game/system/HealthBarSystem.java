@@ -14,6 +14,7 @@ import com.jme3.scene.control.BillboardControl;
 import com.jme3.scene.control.BillboardControl.Alignment;
 import com.jme3.scene.shape.Quad;
 import com.simsilica.es.EntitySet;
+import org.jme.zombies.game.component.AIComponent;
 import org.jme.zombies.game.component.DamageComponent;
 import org.jme.zombies.game.component.DetachComponent;
 import org.jme.zombies.game.component.HealthComponent;
@@ -25,12 +26,13 @@ public class HealthBarSystem extends AbstractAppState {
 
     private EntitySet entities;
     private AssetManager assetManager;
+    private EntityState entityState;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
 
-        var entityState = stateManager.getState(EntityState.class);
+        this.entityState = stateManager.getState(EntityState.class);
 
         this.entities = entityState.getEntities(
                 NodeComponent.class,
@@ -80,6 +82,7 @@ public class HealthBarSystem extends AbstractAppState {
             // Animate enemy's death and remove it from the terrain
             if (healthComponent.health < 0) {
                 enemy.getControl(AgentAnimationControl.class).markDead();
+                entityState.removeComponentByEntityId(entity.getId(), AIComponent.class);
                 entity.set(new DetachComponent(System.currentTimeMillis() + 2500));
             }
         });

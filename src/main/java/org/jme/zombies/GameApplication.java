@@ -5,7 +5,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.font.BitmapText;
 import com.jme3.system.AppSettings;
-import org.jme.zombies.game.listeners.BallCollisionListener;
+import org.jme.zombies.game.listeners.BulletCollisionListener;
 import org.jme.zombies.game.listeners.InputListener;
 import org.jme.zombies.game.listeners.ShootListener;
 import org.jme.zombies.game.states.EntityState;
@@ -59,7 +59,7 @@ public class GameApplication extends SimpleApplication {
         stateManager.attach(new DetachingSystem());
         stateManager.attach(new HealthBarSystem());
 
-        var ballCollisionListener = new BallCollisionListener(this);
+        var ballCollisionListener = new BulletCollisionListener(this);
 
         bulletAppState.setDebugEnabled(false);
         bulletAppState.getPhysicsSpace().addCollisionListener(ballCollisionListener);

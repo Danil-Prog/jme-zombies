@@ -11,13 +11,13 @@ import org.jme.zombies.game.states.EntityState;
 
 import java.util.Random;
 
-public class BallCollisionListener implements PhysicsCollisionListener {
+public class BulletCollisionListener implements PhysicsCollisionListener {
 
     private final AssetManager assetManager;
     private final Random random;
     private final EntityState entityState;
 
-    public BallCollisionListener(GameApplication app) {
+    public BulletCollisionListener(GameApplication app) {
         this.assetManager = app.getAssetManager();
         this.random = new Random();
         this.entityState = app.getStateManager().getState(EntityState.class);
@@ -31,10 +31,10 @@ public class BallCollisionListener implements PhysicsCollisionListener {
         Node bullet = null;
         Node target = null;
 
-        if (nameA.contains("Ball") && nameB.contains("Enemy")) {
+        if (nameA.contains("Bullet") && nameB.contains("Enemy")) {
             bullet = (Node) event.getNodeA();
             target = (Node) event.getNodeB();
-        } else if (nameB.contains("Ball") && nameA.contains("Enemy")) {
+        } else if (nameB.contains("Bullet") && nameA.contains("Enemy")) {
             bullet = (Node) event.getNodeB();
             target = (Node) event.getNodeA();
         }

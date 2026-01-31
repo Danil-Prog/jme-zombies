@@ -74,6 +74,10 @@ public class EntityFactory {
         return entityData;
     }
 
+    public boolean removeComponent(EntityId entityId, Class type) {
+        return entityData.removeComponent(entityId, type);
+    }
+
     public record FactoryData(
             Node world,
             EntityData entityData,

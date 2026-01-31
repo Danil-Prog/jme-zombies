@@ -31,7 +31,7 @@ public class DetachingSystem extends AbstractAppState {
             if (detachComponent.expireIn < System.currentTimeMillis()) {
                 NodeComponent nodeComponent = entity.get(NodeComponent.class);
 
-                entityState.removeEntityById(entity.getId());
+                entityState.removeEntityByEntityId(entity.getId());
                 nodeComponent.entity.removeFromParent();
 
 //                entityState.createEntityByType(EntityType.ENEMY, 0f, 0f);

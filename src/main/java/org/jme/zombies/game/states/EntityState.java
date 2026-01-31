@@ -21,11 +21,11 @@ public class EntityState extends AbstractAppState {
 
         this.entityFactory = new EntityFactory(stateManager, app);
 
-        this.createEntityByType(EntityType.PLAYER);
-        this.createEntityByType(EntityType.ENEMY, 0f, 0f);
+        this.createEntityByEntiyType(EntityType.PLAYER);
+        this.createEntityByEntiyType(EntityType.ENEMY, 0f, 0f);
     }
 
-    public void createEntityByType(EntityType type, Object... params) {
+    public void createEntityByEntiyType(EntityType type, Object... params) {
         entityFactory.createEntity(type, params);
     }
 
@@ -33,12 +33,16 @@ public class EntityState extends AbstractAppState {
         return entityFactory.getEntity(entityId, types);
     }
 
-    public void removeEntityById(EntityId entityId) {
+    public void removeEntityByEntityId(EntityId entityId) {
         entityFactory.removeEntity(entityId);
     }
 
     public EntitySet getEntities(Class... types) {
         return entityFactory.getEntityData().getEntities(types);
+    }
+
+    public boolean removeComponentByEntityId(EntityId entityId, Class type) {
+        return entityFactory.removeComponent(entityId, type);
     }
 
     public Entity getEntityOrThrow(Class... types) {

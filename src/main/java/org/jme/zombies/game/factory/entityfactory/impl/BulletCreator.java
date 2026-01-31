@@ -59,7 +59,7 @@ public class BulletCreator extends EntityCreator<EntityType> {
         var bullet = nodeComponent.entity;
 
         bullet.attachChild(sphere);
-        bullet.setName("Ball_" + index++);
+        bullet.setName("Bullet_" + index++);
         bullet.addControl(rigidBodyControl);
         bullet.setShadowMode(ShadowMode.CastAndReceive);
         bullet.addControl(bulletControl);
