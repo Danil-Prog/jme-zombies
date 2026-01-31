@@ -52,7 +52,7 @@ public class BulletCreator extends EntityCreator<EntityType> {
         nodeComponent.entity = new Node();
 
         DetachComponent detachComponent = new DetachComponent();
-        detachComponent.expireIn = System.currentTimeMillis() + 5000;
+        detachComponent.expireIn = System.currentTimeMillis() + 2500;
 
         ShootComponent shootComponent = new ShootComponent();
 

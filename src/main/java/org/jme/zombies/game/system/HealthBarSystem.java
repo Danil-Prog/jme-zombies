@@ -75,8 +75,6 @@ public class HealthBarSystem extends AbstractAppState {
             Quad quad = (Quad) geometry.getMesh();
             quad.updateGeometry(width, 0.15f);
 
-            System.out.println("Здоровья: " + width);
-
             damageComponent.isHit = false;
 
             // Animate enemy's death and remove it from the terrain
