@@ -31,7 +31,7 @@ public class ItemCreator extends EntityCreator<EntityType> {
     }
 
     @Override
-    public EntityId createEntity(Object... params) {
+    public Node createEntity(Object... params) {
         var position = (Vector3f) params[0];
 
         position.y += 1f;
@@ -65,6 +65,6 @@ public class ItemCreator extends EntityCreator<EntityType> {
                 detachComponent
         );
 
-        return entityId;
+        return item;
     }
 }

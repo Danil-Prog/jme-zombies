@@ -58,7 +58,7 @@ public class EntityFactory {
         entityCreators.put(EntityType.ITEM, new ItemCreator(factoryData));
     }
 
-    public EntityId createEntity(EntityType type, Object... params) {
+    public Node createEntity(EntityType type, Object... params) {
         return entityCreators.get(type).createEntity(params);
     }
 

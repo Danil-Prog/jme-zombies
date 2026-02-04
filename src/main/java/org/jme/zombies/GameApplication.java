@@ -8,6 +8,8 @@ import com.jme3.system.AppSettings;
 import org.jme.zombies.game.listeners.BulletCollisionListener;
 import org.jme.zombies.game.listeners.InputListener;
 import org.jme.zombies.game.listeners.ShootListener;
+import org.jme.zombies.game.server.NetworkedEntityData;
+import org.jme.zombies.game.states.EntityDataState;
 import org.jme.zombies.game.states.EntityState;
 import org.jme.zombies.game.states.NavigationMeshAppState;
 import org.jme.zombies.game.states.WorldAppState;
@@ -15,6 +17,7 @@ import org.jme.zombies.game.system.AIMovementSystem;
 import org.jme.zombies.game.system.DetachingSystem;
 import org.jme.zombies.game.system.HealthBarSystem;
 import org.jme.zombies.game.system.PlayerMovementSystem;
+import org.jme.zombies.game.system.RenderAppState;
 
 public class GameApplication extends SimpleApplication {
 
@@ -58,6 +61,8 @@ public class GameApplication extends SimpleApplication {
         stateManager.attach(new PlayerMovementSystem());
         stateManager.attach(new DetachingSystem());
         stateManager.attach(new HealthBarSystem());
+        stateManager.attach(new RenderAppState());
+        stateManager.attach(new EntityDataState(new NetworkedEntityData("default-server", 1, "localhost", 9942).getEntityData()));
 
         var ballCollisionListener = new BulletCollisionListener(this);
 

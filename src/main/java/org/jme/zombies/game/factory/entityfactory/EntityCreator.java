@@ -17,7 +17,7 @@ public abstract class EntityCreator<T extends EntityType> {
 
     public abstract EntityType getEntityType();
 
-    public abstract EntityId createEntity(Object... params);
+    public abstract Node createEntity(Object... params);
 
     protected void render(Node entity) {
         bulletAppState.getPhysicsSpace().add(entity);

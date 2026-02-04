@@ -75,5 +75,6 @@ public class PlayerMovementSystem extends AbstractAppState {
         camera.setLocation(control.getPhysicsLocation());
 
         positionComponent.position = control.getPhysicsLocation();
+        positionComponent.rotate = camera.getRotation();
     }
 }

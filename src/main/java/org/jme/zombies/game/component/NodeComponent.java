@@ -5,4 +5,8 @@ import com.simsilica.es.EntityComponent;
 
 public class NodeComponent implements EntityComponent {
     public Node entity;
+
+    public NodeComponent() {
+        // for serialization
+    }
 }

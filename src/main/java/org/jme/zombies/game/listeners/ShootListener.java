@@ -35,7 +35,7 @@ public class ShootListener extends AbstractAppState implements ActionListener {
     @Override
     public void onAction(String name, boolean isPressed, float tpf) {
         if (!isPressed) {
-            entityState.createEntityByEntiyType(EntityType.BULLET, camera.getLocation(), camera.getDirection());
+            entityState.createEntityByEntityType(EntityType.BULLET, camera.getLocation(), camera.getDirection());
         }
     }
 

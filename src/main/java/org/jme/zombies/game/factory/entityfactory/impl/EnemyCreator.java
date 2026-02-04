@@ -43,7 +43,7 @@ public class EnemyCreator extends EntityCreator<EntityType> {
     }
 
     @Override
-    public EntityId createEntity(Object... params) {
+    public Node createEntity(Object... params) {
         float x = (float) params[0];
         float z = (float) params[1];
 
@@ -81,6 +81,6 @@ public class EnemyCreator extends EntityCreator<EntityType> {
                 new CrowdComponent()
         );
 
-        return entityId;
+        return npc;
     }
 }

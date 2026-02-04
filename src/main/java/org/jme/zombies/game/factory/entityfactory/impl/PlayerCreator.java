@@ -41,7 +41,7 @@ public class PlayerCreator extends EntityCreator<EntityType> {
     }
 
     @Override
-    public EntityId createEntity(Object... params) {
+    public Node createEntity(Object... params) {
         EntityId entityId = entityData.createEntity();
 
         Spatial weapon = assetManager.loadModel("Weapons/Pistol.j3o");
@@ -87,6 +87,6 @@ public class PlayerCreator extends EntityCreator<EntityType> {
                 new PositionComponent()
         );
 
-        return entityId;
+        return player;
     }
 }

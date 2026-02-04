@@ -38,7 +38,7 @@ public class BulletCreator extends EntityCreator<EntityType> {
     }
 
     @Override
-    public EntityId createEntity(Object... params) {
+    public Node createEntity(Object... params) {
         var location = (Vector3f) params[0];
         var direction = (Vector3f) params[1];
 
@@ -76,6 +76,6 @@ public class BulletCreator extends EntityCreator<EntityType> {
                 detachComponent
         );
 
-        return id;
+        return bullet;
     }
 }
