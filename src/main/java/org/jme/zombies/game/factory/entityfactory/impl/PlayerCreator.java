@@ -12,6 +12,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.CameraControl.ControlDirection;
 import com.simsilica.es.EntityData;
 import com.simsilica.es.EntityId;
+import com.simsilica.es.client.RemoteEntityData;
 import org.jme.zombies.game.component.MoveComponent;
 import org.jme.zombies.game.component.NodeComponent;
 import org.jme.zombies.game.component.PlayerComponent;

@@ -1,5 +1,6 @@
 package org.jme.zombies;
 
+import com.jme3.app.SimpleApplication;
 import com.jme3.network.ConnectionListener;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Network;
@@ -9,13 +10,15 @@ import com.jme3.network.serializing.serializers.FieldSerializer;
 import com.jme3.network.service.HostedService;
 import com.simsilica.es.base.DefaultEntityData;
 import com.simsilica.es.server.EntityDataHostedService;
-import java.io.IOException;
 import org.jme.zombies.game.component.NodeComponent;
 import org.jme.zombies.game.component.PositionComponent;
 import org.jme.zombies.game.server.GameLogic;
+
+import java.io.IOException;
+
 import static com.jme3.network.MessageConnection.CHANNEL_DEFAULT_RELIABLE;
 
-public class ServerApplication {
+public class ServerApplication extends SimpleApplication {
 
     private final Server server;
     private final DefaultEntityData entityData;
@@ -25,6 +28,11 @@ public class ServerApplication {
         this.server = Network.createServer("default-server", 1, 9942, 9942);
         this.entityData = new DefaultEntityData();
         this.gameLogic = new GameLogic(entityData);
+    }
+
+    @Override
+    public void simpleInitApp() {
+
     }
 
     public static void main(String[] args) throws IOException {
